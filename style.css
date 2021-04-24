@@ -1,0 +1,141 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --cel-size: 120px;
+    --mark-size: calc(var(--cel-size) * .9)
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.papan {
+    margin-top: 3em;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    color: white;
+}
+
+.sel {
+    width: var(--cel-size);
+    cursor: pointer;
+    height: 120px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white;
+}
+
+.sel:first-child,
+.sel:nth-child(2),
+.sel:nth-child(3) {
+    border-top: none;
+}
+
+.sel:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.sel:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.sel:last-child,
+.sel:nth-child(8),
+.sel:nth-child(7) {
+    border-bottom: none;
+}
+
+.sel.x,
+.sel.c {
+    cursor: not-allowed;
+}
+
+.sel.x::before,
+.sel.x::after,
+.sel.c::before {
+    background-color: black;
+}
+
+.papan.x .sel:not(.x):not(.c):hover::before,
+.papan.x .sel:not(.x):not(.c):hover::after,
+.papan.c .sel:not(.x):not(.c):hover::before {
+    background-color: lightgray;
+}
+
+.sel.x::before,
+.sel.x::after,
+.papan.x .sel:not(.x):not(.c):hover::before,
+.papan.x .sel:not(.x):not(.c):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+}
+
+.sel.x::before,
+.papan.x .sel:not(.x):not(.c):hover::before {
+    transform: rotate(45deg);
+}
+
+.sel.x::after,
+.papan.x .sel:not(.x):not(.c):hover::after {
+    transform: rotate(-45deg);
+}
+
+.sel.c::before,
+.sel.c::after,
+.papan.c .sel:not(.x):not(.c):hover::before,
+.papan.c .sel:not(.x):not(.c):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.sel.c::before,
+.papan.c .sel:not(.x):not(.c):hover::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+
+.sel.c::after,
+.papan.c .sel:not(.x):not(.c):hover::after {
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background-color: white;
+}
+
+.win-msg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-size: 5rem;
+}
+
+.win-msg button {
+    font-size: 2rem;
+}
+
+.win-msg.show {
+    display: none;
+}
